@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="535ce9db-c278-4bea-8cc8-085a9e383ede" >
+		<http:listener-connection host="0.0.0.0" port="8082" />
+	</http:listener-config>
+	<flow name="5__query-paramFlow" doc:id="6561ece0-31ff-4ce9-9a30-b417e258fc98" >
+		<http:listener doc:name="Listener" doc:id="e0b6d793-eedf-4334-a0ed-5b549496ec7c" config-ref="HTTP_Listener_config" path="qp"/>
+		<logger level="INFO" doc:name="Logger" doc:id="2755c42c-dd28-43e2-bdde-75e5995fe7b9" message="Process Started"/>
+		<set-payload value="#[attributes.queryParams.name]" doc:name="Set Payload" doc:id="f24f417f-b7e1-4c98-a51c-ac23e253e8bf" />
+		<logger level="INFO" doc:name="Logger" doc:id="7a898a2e-07ab-4336-bdbb-4360cacaac5c" message="#[payload]"/>
+	</flow>
+</mule>
